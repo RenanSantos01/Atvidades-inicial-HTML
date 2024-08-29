@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Arrecadação da Padaria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f8f8;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Calculadora de Arrecadação da Padaria</h1>
+        <label for="quantidadePaes">Quantidade de pães vendidos:</label>
+        <input type="number" id="quantidadePaes" placeholder="Digite a quantidade de pães">
+
+        <label for="quantidadeBroas">Quantidade de broas vendidas:</label>
+        <input type="number" id="quantidadeBroas" placeholder="Digite a quantidade de broas">
+
+        <button onclick="calcularArrecadacao()">Calcular Arrecadação</button>
+
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        function calcularArrecadacao() {
+            const precoPao = 0.12; // Preço de cada pãozinho
+            const precoBroa = 1.50; // Preço de cada broa
+
+            const quantidadePaes = parseInt(document.getElementById('quantidadePaes').value);
+            const quantidadeBroas = parseInt(document.getElementById('quantidadeBroas').value);
+
+            // Verifica se os valores inseridos são números válidos
+            if (isNaN(quantidadePaes) || isNaN(quantidadeBroas) || quantidadePaes < 0 || quantidadeBroas < 0) {
+                document.getElementById('resultado').innerText = 'Por favor, insira quantidades válidas de pães e broas.';
+                return;
+            }
+
+            // Calcula o total arrecadado
+            const totalPaes = quantidadePaes * precoPao;
+            const totalBroas = quantidadeBroas * precoBroa;
+            const totalArrecadado = totalPaes + totalBroas;
+
+            // Calcula 10% para a poupança
+            const poupanca = totalArrecadado * 0.10;
+
+            // Exibe os resultados
+            document.getElementById('resultado').innerText = `Total arrecadado: R$ ${totalArrecadado.toFixed(2)}
+            \nValor a ser guardado na poupança: R$ ${poupanca.toFixed(2)}`;
+        }
+    </script>
+
+</body>
+</html>
